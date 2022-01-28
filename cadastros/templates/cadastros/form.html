@@ -1,0 +1,27 @@
+{% extends 'paginas/modelo.html' %}
+
+{% load static %}
+
+{% load crispy_forms_tags %}
+
+{% block conteudo %}
+
+    <h2 class="mt-4 mb-4 border-bottom pb-2">
+        {{ titulo }}
+    </h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+        
+        {{ form|crispy }}
+
+        <hr class="">
+        
+        <button type="submit" class="btn btn-{{cor}}">
+            {{ botao }}
+        </button>
+
+    </form>
+
+{% endblock %}

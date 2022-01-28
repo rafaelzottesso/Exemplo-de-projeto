@@ -1,0 +1,170 @@
+{% load static %}
+
+<!doctype html>
+<html lang="pt-br" class="h-100">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Prof. Rafael H. D. Zottesso">
+    
+    {% block titulo %}
+    <title>Blog de Web - Informática</title>
+    {% endblock %}
+
+    <!-- ícone da aba -->
+    <link rel="shortcut icon" href="{% static 'imagens/logo_ifpr.jpg' %}" type="image/x-icon">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+
+
+    <style>
+        main > .container {
+            padding: 60px 15px 0;
+        }
+
+        .bd-placeholder-img {
+            font-size: 1.125rem;
+            text-anchor: middle;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+        }
+
+        @media (min-width: 768px) {
+            .bd-placeholder-img-lg {
+                font-size: 3.5rem;
+            }
+        }
+    </style>
+
+</head>
+
+<body class="d-flex flex-column h-100">
+
+    <header>
+        <!-- Fixed navbar -->
+        <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#">Fixed navbar</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
+                    aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <ul class="navbar-nav me-auto mb-2 mb-md-0">
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="{% url 'index-2' %}">Início</a>
+                        </li>
+
+                        {% if request.user.is_authenticated %}
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Cadastros
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-estado' %}">Estado</a></li>
+                                <li><a class="dropdown-item" href="{% url 'cadastrar-cidade' %}">Cidade</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Listas
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" href="{% url 'listar-estado' %}">Estado</a></li>
+                                <li><a class="dropdown-item" href="{% url 'listar-cidade' %}">Cidade</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            </ul>
+                        </li>
+
+                        {% endif %}
+
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+                        </li>
+
+                    </ul>
+                    
+                    
+                    {% if request.user.is_authenticated %}
+                    <div class="dropdown">
+                        <button class="btn btn-light dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{ request.user }}
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Meu perfil</a></li>
+                            <li><a class="dropdown-item" href="#">Alterar senha</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="{% url 'logout' %}">Logout</a></li>
+                        </ul>
+                    </div>
+                    {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-light mx-2">Login</a>
+                    <a href="#" class="btn btn-success mx-2">Registrar</a>
+                    {% endif %}
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+
+    <!-- Begin page content -->
+    <main class="flex-shrink-0">
+        <div class="container">
+            <br>
+            <!-- início do conteúdo -->
+            {% block conteudo %}
+
+            <h1 class="mt-5">Blog de Web</h1>
+            <p class="lead">Pin a footer to the bottom of the viewport in desktop browsers with this custom HTML and
+                CSS. A fixed navbar has been added with <code class="small">padding-top: 60px;</code> on the <code
+                    class="small">main &gt; .container</code>.</p>
+            <p>Back to <a href="/docs/5.1/examples/sticky-footer/">the default sticky footer</a> minus the navbar.</p>
+
+            {% endblock %}
+            <!-- fim do conteúdo -->
+        </div>
+    </main>
+
+
+    <footer class="footer mt-auto py-3 bg-light">
+        <div class="container">
+            <span class="text-muted">
+                {% block rodape %}
+
+                Projeto Tal tal tal <br>
+                Desenvolvido por: Prof. Rafael Henrique D. Zottesso
+                
+                {% endblock %}
+            </span>
+        </div>
+    </footer>
+
+
+    <script src="{% static 'javascript/jquery-3.6.0.js' %}"></script>
+    <script src="{% static 'javascript/bootstrap.js' %}"></script>
+
+
+</body>
+
+</html>
